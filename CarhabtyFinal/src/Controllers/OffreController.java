@@ -16,22 +16,7 @@ import java.util.Map;
 
 public class OffreController {
 
-    public String ParseOffre() {
-
-        ConnectionRequest req = new ConnectionRequest();
-        req.setUrl("http://localhost/Carhabtyy/web/app_dev.php/services/listOffre");
-        req.addResponseListener(new ActionListener<NetworkEvent>() {
-            @Override
-            public void actionPerformed(NetworkEvent evt) {
-                getListOffre(new String(req.getResponseData()));
-            }
-        });
-        NetworkManager.getInstance().addToQueue(req);
-    return new String(req.getResponseData());
-    }
-
-    
-    
+  
     public ArrayList<Offre> getListOffre(String json) {
 
         ArrayList<Offre> ListOffres = new ArrayList<>();

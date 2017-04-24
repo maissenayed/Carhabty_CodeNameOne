@@ -23,6 +23,9 @@ import Controllers.OffreController;
 import com.codename1.components.ScaleImageLabel;
 import com.codename1.components.SpanLabel;
 import com.codename1.components.ToastBar;
+import com.codename1.io.ConnectionRequest;
+import com.codename1.io.NetworkEvent;
+import com.codename1.io.NetworkManager;
 import com.codename1.ui.Button;
 import com.codename1.ui.ButtonGroup;
 import com.codename1.ui.Component;
@@ -36,6 +39,7 @@ import com.codename1.ui.RadioButton;
 import com.codename1.ui.Tabs;
 import com.codename1.ui.TextArea;
 import com.codename1.ui.Toolbar;
+import com.codename1.ui.events.ActionListener;
 import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.layouts.BoxLayout;
 import com.codename1.ui.layouts.FlowLayout;
@@ -133,12 +137,25 @@ public class OffreForm extends SideMenuForm {
         
         
         OffreController op = new OffreController();
+        ConnectionRequest req = new ConnectionRequest();
+        req.setUrl("http://localhost/Carhabtyy/web/app_dev.php/services/listOffre");    
+        req.addResponseListener(new ActionListener<NetworkEvent>() {
+            @Override
+            public void actionPerformed(NetworkEvent evt) {
+                op.getListOffre(new String(req.getResponseData()));
+                   for(int i=0; i< op.getListOffre(new String(req.getResponseData())).size();i++){
         
+            String nom = op.getListOffre(new String(req.getResponseData())).get(i).getNomOffre();
+            float prix = op.getListOffre(new String(req.getResponseData())).get(i).getPrix();
+            float reduction =op.getListOffre(new String(req.getResponseData())).get(i).getReduction();
+             
+            addButton(res.getImage("news-item-1.jpg"), nom, false, prix, reduction);         
+       }            
+    }
+ });
         
-                
-       
-        addButton(res.getImage("news-item-1.jpg"), "Morbi per tincidunt tellus sit of amet eros laoreet.", false, 26, 32);
-
+        NetworkManager.getInstance().addToQueue(req);
+    
     }
     
     private void updateArrowPosition(Button b, Label arrow) {
@@ -186,7 +203,7 @@ public class OffreForm extends SideMenuForm {
         swipe.addTab("", page1);
     }
     
-   private void addButton(Image img, String title, boolean liked, int likeCount, int commentCount) {
+   private void addButton(Image img, String title, boolean liked, float likeCount, float commentCount) {
        int height = Display.getInstance().convertToPixels(11.5f);
        int width = Display.getInstance().convertToPixels(14f);
        Button image = new Button(img.fill(width, height));
