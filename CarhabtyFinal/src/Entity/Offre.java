@@ -13,14 +13,14 @@ public class Offre {
     private int id ;
     private String nomOffre;    
     private float prix;
-    private int reduction;
+    private float reduction;
     private Date dateExp;
     private String image;
     private User user;
 
     public Offre(){}
 
-     public Offre(int id,String nomOffre, float prix, int reduction) {
+     public Offre(int id,String nomOffre, float prix, float reduction) {
        
         this.id=id;
         this.nomOffre = nomOffre;
@@ -29,7 +29,7 @@ public class Offre {
      }
     
     
-    public Offre(int id,String nomOffre, String descriptionOffre, float prix, int reduction, Date dateExp) {
+    public Offre(int id,String nomOffre, String descriptionOffre, float prix, float reduction, Date dateExp) {
        
         this.id=id;
         this.nomOffre = nomOffre;
@@ -41,7 +41,7 @@ public class Offre {
     
     
     
-    public Offre(String nom, float prix, int reduction, Date dateExp, String image) {
+    public Offre(String nom, float prix, float reduction, Date dateExp, String image) {
         this.nomOffre = nom;
        
         this.prix = prix;
@@ -90,11 +90,11 @@ public class Offre {
         this.prix = prix;
     }
 
-    public int getReduction() {
+    public float getReduction() {
         return reduction;
     }
 
-    public void setReduction(int reduction) {
+    public void setReduction(float reduction) {
         this.reduction = reduction;
     }
 
@@ -126,7 +126,9 @@ public class Offre {
 
     @Override
     public String toString() {
-        return "Offre{" + "nom=" + nomOffre + ", prix=" + prix + ", reduction=" + reduction + ", dateExp=" + dateExp + ", image=" + image + ", user=" + user.getId() + '}';
+     //   return "Offre{" + "nom=" + nomOffre + ", prix=" + prix + ", reduction=" + reduction + ", dateExp=" + dateExp + ", image=" + image + ", user=" + user.getId() + '}';
+        return "Offre{" + "nom=" + nomOffre  + ", image=" + image + ", reduction=" + reduction + ", prix=" + prix + '}';
+    
     }
 
 
