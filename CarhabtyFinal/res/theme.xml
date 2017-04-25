@@ -2,8 +2,10 @@
 
 <resource majorVersion="1" minorVersion="7" useXmlUI="false">
     <image name="activation-background.jpg"  />
+    <image name="cake.png"  />
     <image name="confirmation-background.jpg"  />
     <image name="dog.jpg"  />
+    <image name="dude.jpg"  />
     <image name="facebook-logo.png" type="multi"  />
     <image name="karhabty-logo.png"  />
     <image name="Logo.png" type="multi"  />

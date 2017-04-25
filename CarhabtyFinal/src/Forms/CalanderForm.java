@@ -5,6 +5,7 @@
  */
 package Forms;
 
+import Entity.CalendarEvent;
 import com.codename1.components.FloatingHint;
 import com.codename1.components.ScaleImageLabel;
 import com.codename1.components.SpanLabel;
@@ -33,7 +34,10 @@ import com.codename1.ui.events.ActionListener;
 import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.layouts.BoxLayout;
 import com.codename1.ui.layouts.FlowLayout;
+import com.codename1.ui.layouts.GridLayout;
 import com.codename1.ui.layouts.LayeredLayout;
+import com.codename1.ui.list.DefaultListModel;
+import com.codename1.ui.list.MultiList;
 import com.codename1.ui.plaf.Style;
 import com.codename1.ui.util.Resources;
 import java.io.IOException;
@@ -41,19 +45,27 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import Entity.Voiture;
-import java.util.HashMap;
+import static com.codename1.ui.Component.BOTTOM;
+import static com.codename1.ui.Component.CENTER;
+import static com.codename1.ui.Component.LEFT;
+import static com.codename1.ui.Component.RIGHT;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
+import java.util.Date;
+import java.util.HashMap;
 
 /**
  *
  * @author Maissen
  */
-public class VoitureForm extends SideMenuForm {
-
-    public VoitureForm(Resources res) {
+public class CalanderForm extends SideMenuForm {
+    public CalanderForm(Resources res, int id) {
         super("Newsfeed", BoxLayout.y());
         ConnectionRequest con = new ConnectionRequest();
-        con.setUrl("http://localhost/carhabty/web/app_dev.php/voiture/json");
+        System.out.println(id);
+        con.setUrl("http://localhost/carhabty/web/app_dev.php/voiture/"+id+"/calendar/json");
         con.setPost(false);
         con.addResponseListener(new ActionListener<NetworkEvent>() {
 
@@ -61,24 +73,25 @@ public class VoitureForm extends SideMenuForm {
             public void actionPerformed(NetworkEvent evt) {
                 System.out.println(getListEtudiant(new String(con.getResponseData())));
                 ArrayList<Map<String, Object>> data = new ArrayList<>();
-                for (Voiture obj : getListEtudiant(new String(con.getResponseData()))) {
-                    addVoiturelistView(res.getImage("news-item-4.jpg"), obj.getMarque(), obj.getMarque(), obj.getModel(),res,obj.getId());
-                     
+                for (CalendarEvent obj : getListEtudiant(new String(con.getResponseData()))) {
+                    addVoiturelistView(res.getImage("news-item-4.jpg"), obj.getTitle(), obj.getStartDate(), obj.getStartDate(), res);
+
                 }
+
             }
         });
         NetworkManager.getInstance().addToQueue(con);
-        
+
         Toolbar tb = new Toolbar(true);
         setToolbar(tb);
         getTitleArea().setUIID("Container");
-        setTitle("voiture");
+        setTitle("suivie voiture");
         getContentPane().setScrollVisible(false);
         super.addSideMenu(res);
         Tabs swipe = new Tabs();
         Label spacer1 = new Label();
         Label spacer2 = new Label();
-        addTab(swipe, res.getImage("dude.jpg"), spacer1, " ", "", "choisire votre voiture. ");
+        addTab(swipe, res.getImage("dude.jpg"), spacer1, " ", "", " to do list . ");
         ButtonGroup bg = new ButtonGroup();
         int size = Display.getInstance().convertToPixels(1);
         Image unselectedWalkthru = Image.createImage(size, size, 0);
@@ -135,18 +148,18 @@ public class VoitureForm extends SideMenuForm {
 
         swipe.addTab("", page1);
     }
-    private void addVoiturelistView(Image img, String title, String marque, String modele, Resources res,int id) {
+    private void addVoiturelistView(Image img, String title, String start, String modele, Resources res) {
         int height = Display.getInstance().convertToPixels(11.5f);
         int width = Display.getInstance().convertToPixels(14f);
+
         Button image = new Button(img.fill(width, height));
         image.setUIID("Label");
         Container cnt = BorderLayout.west(image);
         cnt.setLeadComponent(image);
         TextArea ta = new TextArea(title);
-
         ta.setUIID("NewsTopLine");
         ta.setEditable(false);
-        Label Marque = new Label(marque);
+        Label Marque = new Label(start);
         Marque.setTextPosition(RIGHT);
         Label Modele = new Label(modele);
         Modele.setTextPosition(LEFT);
@@ -156,7 +169,8 @@ public class VoitureForm extends SideMenuForm {
                         ta, BoxLayout.encloseX(Marque, Modele)
                 ));
         add(cnt);
-        image.addActionListener(e ->  new CalanderForm(res,id).show());
+
+        image.addActionListener(e -> ToastBar.showMessage("startdate est " + start, FontImage.MATERIAL_INFO));
 
     }
     private void addButton(Image img, String title, boolean liked, int likeCount, int commentCount) {
@@ -191,31 +205,35 @@ public class VoitureForm extends SideMenuForm {
         add(cnt);
         image.addActionListener(e -> ToastBar.showMessage(title, FontImage.MATERIAL_INFO));
     }
-    public ArrayList<Voiture> getListEtudiant(String json) {
-        ArrayList<Voiture> listVoiture = new ArrayList<>();
+    public ArrayList<CalendarEvent> getListEtudiant(String json) {
+        ArrayList<CalendarEvent> listVoiture = new ArrayList<>();
 
         try {
-
             JSONParser j = new JSONParser();
-
             Map<String, Object> etudiants = j.parseJSON(new CharArrayReader(json.toCharArray()));
-            List<Map<String, Object>> list = (List<Map<String, Object>>) etudiants.get("voiture");
-
+            List<Map<String, Object>> list = (List<Map<String, Object>>) etudiants.get("Calander");
             for (Map<String, Object> obj : list) {
-                Voiture e = new Voiture();
-                System.out.println();
-                int i =(int) (Double.parseDouble(obj.get("id").toString()));
-                e.setId(i);
-                
-                e.setMarque(obj.get("marque").toString());
-                e.setModel(obj.get("modele").toString());
+                CalendarEvent e = new CalendarEvent();
+              /*  DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+                Date startDate = null;
+                Date endDate = null;
+                String newDateString = null;
+                try {
+                    startDate = df.parse(obj.get("start_date").toString());
+                    newDateString = df.format(startDate);
+                } catch (ParseException ex) {
+                    ex.printStackTrace();
+                }*/
+              
+                e.setStartDate(obj.get("start_date").toString());
+                e.setTitle(obj.get("title").toString());
                 listVoiture.add(e);
+
             }
 
         } catch (IOException ex) {
         }
         return listVoiture;
-
     }
     private Map<String, Object> createListEntry(String name, String date) {
         Map<String, Object> entry = new HashMap<>();
@@ -223,5 +241,6 @@ public class VoitureForm extends SideMenuForm {
         entry.put("Line2", date);
         return entry;
     }
+
 
 }
