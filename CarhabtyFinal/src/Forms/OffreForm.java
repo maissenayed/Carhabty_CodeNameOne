@@ -19,9 +19,13 @@
 
 package Forms;
 
+import Controllers.OffreController;
 import com.codename1.components.ScaleImageLabel;
 import com.codename1.components.SpanLabel;
 import com.codename1.components.ToastBar;
+import com.codename1.io.ConnectionRequest;
+import com.codename1.io.NetworkEvent;
+import com.codename1.io.NetworkManager;
 import com.codename1.ui.Button;
 import com.codename1.ui.ButtonGroup;
 import com.codename1.ui.Component;
@@ -35,6 +39,7 @@ import com.codename1.ui.RadioButton;
 import com.codename1.ui.Tabs;
 import com.codename1.ui.TextArea;
 import com.codename1.ui.Toolbar;
+import com.codename1.ui.events.ActionListener;
 import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.layouts.BoxLayout;
 import com.codename1.ui.layouts.FlowLayout;
@@ -51,7 +56,7 @@ public class OffreForm extends SideMenuForm {
         Toolbar tb = new Toolbar(true);
         setToolbar(tb);
         getTitleArea().setUIID("Container");
-        setTitle("Newsfeed");
+        setTitle("Nos offres");
         getContentPane().setScrollVisible(false);
         
         super.addSideMenu(res);
@@ -103,41 +108,54 @@ public class OffreForm extends SideMenuForm {
         add(LayeredLayout.encloseIn(swipe, radioContainer));
         
         ButtonGroup barGroup = new ButtonGroup();
-        RadioButton all = RadioButton.createToggle("All", barGroup);
-        all.setUIID("SelectBar");
-        RadioButton featured = RadioButton.createToggle("Featured", barGroup);
-        featured.setUIID("SelectBar");
-        RadioButton popular = RadioButton.createToggle("Popular", barGroup);
-        popular.setUIID("SelectBar");
-        RadioButton myFavorite = RadioButton.createToggle("My Favorites", barGroup);
-        myFavorite.setUIID("SelectBar");
+        RadioButton offre = RadioButton.createToggle("offres", barGroup);
+        offre.setUIID("SelectBar");
+        RadioButton coupon = RadioButton.createToggle("coupons", barGroup);
+        coupon.setUIID("SelectBar");
+       
         Label arrow = new Label(res.getImage("news-tab-down-arrow.png"), "Container");
         
         add(LayeredLayout.encloseIn(
-                GridLayout.encloseIn(4, all, featured, popular, myFavorite),
+                GridLayout.encloseIn(2, offre, coupon),
                 FlowLayout.encloseBottom(arrow)
         ));
         
-        all.setSelected(true);
+        offre.setSelected(true);
         arrow.setVisible(false);
         addShowListener(e -> {
             arrow.setVisible(true);
-            updateArrowPosition(all, arrow);
+            updateArrowPosition(offre, arrow);
         });
-        bindButtonSelection(all, arrow);
-        bindButtonSelection(featured, arrow);
-        bindButtonSelection(popular, arrow);
-        bindButtonSelection(myFavorite, arrow);
+        bindButtonSelection(offre, arrow);
+        bindButtonSelection(coupon, arrow);
+       
         
         // special case for rotation
         addOrientationListener(e -> {
             updateArrowPosition(barGroup.getRadioButton(barGroup.getSelectedIndex()), arrow);
         });
         
-        addButton(res.getImage("news-item-1.jpg"), "Morbi per tincidunt tellus sit of amet eros laoreet.", false, 26, 32);
-        addButton(res.getImage("news-item-2.jpg"), "Fusce ornare cursus masspretium tortor integer placera.", true, 15, 21);
-        addButton(res.getImage("news-item-3.jpg"), "Maecenas eu risus blanscelerisque massa non amcorpe.", false, 36, 15);
-        addButton(res.getImage("news-item-4.jpg"), "Pellentesque non lorem diam. Proin at ex sollicia.", false, 11, 9);
+        
+        OffreController op = new OffreController();
+        ConnectionRequest req = new ConnectionRequest();
+        req.setUrl("http://localhost/Carhabtyy/web/app_dev.php/services/listOffre");    
+        req.addResponseListener(new ActionListener<NetworkEvent>() {
+            @Override
+            public void actionPerformed(NetworkEvent evt) {
+                op.getListOffre(new String(req.getResponseData()));
+                   for(int i=0; i< op.getListOffre(new String(req.getResponseData())).size();i++){
+        
+            String nom = op.getListOffre(new String(req.getResponseData())).get(i).getNomOffre();
+            float prix = op.getListOffre(new String(req.getResponseData())).get(i).getPrix();
+            float reduction =op.getListOffre(new String(req.getResponseData())).get(i).getReduction();
+             
+            addButton(res.getImage("news-item-1.jpg"), nom, false, prix, reduction);         
+       }            
+    }
+ });
+        
+        NetworkManager.getInstance().addToQueue(req);
+    
     }
     
     private void updateArrowPosition(Button b, Label arrow) {
@@ -185,7 +203,7 @@ public class OffreForm extends SideMenuForm {
         swipe.addTab("", page1);
     }
     
-   private void addButton(Image img, String title, boolean liked, int likeCount, int commentCount) {
+   private void addButton(Image img, String title, boolean liked, float likeCount, float commentCount) {
        int height = Display.getInstance().convertToPixels(11.5f);
        int width = Display.getInstance().convertToPixels(14f);
        Button image = new Button(img.fill(width, height));
