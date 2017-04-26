@@ -1,5 +1,7 @@
 package Entity;
 
+import com.codename1.ui.Image;
+
 
 
 /**
@@ -20,11 +22,23 @@ public class User {
     private String nomSociete;
     private String activite;
     private String siret;
-    private String image;
+    private Image image;
   
 
     
     public User(){}
+    
+    
+    public User(String username,String email,String nom, String prenom,String role){
+        
+        this.username = username;
+        this.nom = nom;
+        this.prenom = prenom;
+        this.email=email;
+        this.role=role;
+    
+    }
+    
     
     public User(int id, String username,String email, String password,String nom, String prenom, String tel, String adresse) {
         this.id = id;
@@ -185,11 +199,11 @@ public class User {
         this.activite = activite;
     }
     
-     public String getImage() {
+     public Image getImage() {
         return image;
     }
 
-    public void setImage(String image) {
+    public void setImage(Image image) {
         this.image = image;
     } 
 
@@ -204,18 +218,10 @@ public class User {
     
     @Override
     public String toString() {
-        return "User{" + "id=" + id + ", username=" + username + ", email=" + email + ", password=" + password + ", role=" + role + ", nom=" + nom + ", prenom=" + prenom + ", tel=" + tel + ", adresse=" + adresse + ", nomSociete=" + nomSociete + ", activite=" + activite + ", siret=" + siret + '}';
+        return "User{"+", username=" + username + ", email=" + email + ", nom=" + nom + ", prenom=" + prenom + '}';
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 5;
-        return hash;
-    }
-
-   
-   
-
+  
 }
 
 

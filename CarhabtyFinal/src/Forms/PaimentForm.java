@@ -38,6 +38,7 @@ import com.codename1.ui.Label;
 import com.codename1.ui.RadioButton;
 import com.codename1.ui.Tabs;
 import com.codename1.ui.TextArea;
+import com.codename1.ui.TextField;
 import com.codename1.ui.Toolbar;
 import com.codename1.ui.events.ActionListener;
 import com.codename1.ui.layouts.BorderLayout;
@@ -52,14 +53,14 @@ import utils.LienWebService;
 import utils.Session;
 
 
-public class OffreForm extends SideMenuForm {
+public class PaimentForm extends SideMenuForm {
 
-    public OffreForm(Resources res) {
+    public PaimentForm(Resources res) {
         super("Newsfeed", BoxLayout.y());
         Toolbar tb = new Toolbar(true);
         setToolbar(tb);
         getTitleArea().setUIID("Container");
-        setTitle("Nos offres");
+        setTitle("Carhabty");
         getContentPane().setScrollVisible(false);
         
         super.addSideMenu(res);
@@ -69,11 +70,11 @@ public class OffreForm extends SideMenuForm {
 
         Label spacer1 = new Label();
         Label spacer2 = new Label();
-        addTab(swipe, res.getImage("logo-promo.jpg"), spacer1, "", "", "Toutes les nouvelles offres dans Carhabty ");
+        addTab(swipe, res.getImage("bleu.jpg"), spacer1, "", "", "Paiment Partenaire");
       
         
         
-      
+     
         
         swipe.setUIID("Container");
         swipe.getContentPane().setUIID("Container");
@@ -109,66 +110,74 @@ public class OffreForm extends SideMenuForm {
                 rbs[ii].setSelected(true);
             }
         });
-        
+         
         Component.setSameSize(radioContainer, spacer1, spacer2);
         add(LayeredLayout.encloseIn(swipe, radioContainer));
         
         ButtonGroup barGroup = new ButtonGroup();
-        RadioButton offre = RadioButton.createToggle("offres", barGroup);
+        RadioButton offre = RadioButton.createToggle("Coupon Référence", barGroup);
         offre.setUIID("SelectBar");
-       
-       
-        Label arrow = new Label(res.getImage("news-tab-down-arrow.png"), "Container");
+           
+      
+      
         
         add(LayeredLayout.encloseIn(
-                GridLayout.encloseIn(1, offre),
-                FlowLayout.encloseBottom(arrow)
+                GridLayout.encloseIn(1, offre)
+                
+              
         ));
-        
-        offre.setSelected(true);
-        arrow.setVisible(false);
-        addShowListener(e -> {
-            arrow.setVisible(true);
-            updateArrowPosition(offre, arrow);
-        });
-        bindButtonSelection(offre, arrow);
-       
+      
+   
+       // TextField t1 = new TextField("Insérer référence coupon");  
        
         
-        // special case for rotation
-        addOrientationListener(e -> {
-            updateArrowPosition(barGroup.getRadioButton(barGroup.getSelectedIndex()), arrow);
-        });
+          
+               Label l1 = new Label("");
+                Label l2 = new Label("");
+            
+        
+        TextField t1 = new TextField("Insérer référence coupon", "", 20, TextField.ANY);
+        t1.setUIID("TextFieldBlack");
+        addStringValue("", t1);
+        
+         Label l = new Label("");
+          addStringValue("", l1);
+          addStringValue("", l2);
+       
+        
+        Button b = new Button("valider");
+        b.setUIID("Button");
+        addStringValue("", b);
+        
+        Button b1 = new Button("Terminer");
+        b.setUIID("Button");
+        addStringValue("", b1);
+        
+  
         
         
-        OffreController op = new OffreController();
-        ConnectionRequest req = new ConnectionRequest();
-        req.setUrl(LienWebService.OFFRE);    
-        req.addResponseListener(new ActionListener<NetworkEvent>() {
-            @Override
-            public void actionPerformed(NetworkEvent evt) {
-                op.getListOffre(new String(req.getResponseData()));
-                   for(int i=0; i< op.getListOffre(new String(req.getResponseData())).size();i++){
         
-            String nom = op.getListOffre(new String(req.getResponseData())).get(i).getNomOffre();
-            float prix = op.getListOffre(new String(req.getResponseData())).get(i).getPrix();
-            float reduction =op.getListOffre(new String(req.getResponseData())).get(i).getReduction();
-             
-            addButton(res.getImage("news-item-1.jpg"), nom, false, prix, reduction);         
-       }            
-    }
- });
         
-        NetworkManager.getInstance().addToQueue(req);
+        
+        
+        
+        
+        
+        
     
     }
     
-    private void updateArrowPosition(Button b, Label arrow) {
-        arrow.getUnselectedStyle().setMargin(LEFT, b.getX() + b.getWidth() / 2 - arrow.getWidth() / 2);
-        arrow.getParent().repaint();
-        
-        
+   
+    
+     private void addStringValue(String s, Component v) {
+        add(BorderLayout.west(new Label(s, "PaddedLabel")).
+                add(BorderLayout.CENTER, v));
+        add(createLineSeparator(0xeeeeee));
     }
+    
+    
+    
+    
     
     private void addTab(Tabs swipe, Image img, Label spacer, String likesStr, String commentsStr, String text) {
         int size = Math.min(Display.getInstance().getDisplayWidth(), Display.getInstance().getDisplayHeight());
@@ -242,13 +251,5 @@ public class OffreForm extends SideMenuForm {
        image.addActionListener(e -> ToastBar.showMessage(title, FontImage.MATERIAL_INFO));
    }
     
-    private void bindButtonSelection(Button b, Label arrow) {
-        b.addActionListener(e -> {
-            if(b.isSelected()) {
-                
-                updateArrowPosition(b, arrow);
-                
-            }
-        });
-    }
+  
 }

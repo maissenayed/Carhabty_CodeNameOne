@@ -20,7 +20,7 @@
 package Carhabty;
 
 
-import Forms.SignInForm;
+import Forms.LoginForm;
 import com.codename1.ui.Display;
 import com.codename1.ui.Form;
 import com.codename1.ui.Dialog;
@@ -35,14 +35,19 @@ import com.codename1.ui.Toolbar;
 public class Carhabty {
 
     private Form current;
-    private Resources theme;
+    private static Resources theme;
 
+    
+     public static Resources getTheme() {
+        return theme;
+    }
     public void init(Object context) {
         theme = UIManager.initFirstTheme("/theme");
 
         // Disable the global toolbar as we want a layered toolbar
         Toolbar.setGlobalToolbar(false);
 
+        
         // Pro only feature, uncomment if you have a pro subscription
         // Log.bindCrashProtection(true);
     }
@@ -52,7 +57,7 @@ public class Carhabty {
             current.show();
             return;
         }
-        new SignInForm(theme).show();
+        new LoginForm(theme).show();
     }
 
     public void stop() {

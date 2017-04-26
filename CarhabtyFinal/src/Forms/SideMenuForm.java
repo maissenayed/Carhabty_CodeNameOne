@@ -84,11 +84,12 @@ public class SideMenuForm extends Form {
         
         tb.addMaterialCommandToSideMenu("Profile", FontImage.MATERIAL_SETTINGS, e -> new ProfileForm(res).show());
         tb.addMaterialCommandToSideMenu("Offre", FontImage.MATERIAL_SHOPPING_CART, e -> new OffreForm(res).show());
-        tb.addMaterialCommandToSideMenu("Voiture", FontImage.MATERIAL_SHOPPING_CART, e -> new SignInForm(res).show());
-        tb.addMaterialCommandToSideMenu("Event", FontImage.MATERIAL_EXIT_TO_APP, e -> new SignInForm(res).show());
-        tb.addMaterialCommandToSideMenu("Astuce", FontImage.MATERIAL_EXIT_TO_APP, e -> new SignInForm(res).show());
-        tb.addMaterialCommandToSideMenu("Quiz", FontImage.MATERIAL_EXIT_TO_APP, e -> new SignInForm(res).show());
-        tb.addMaterialCommandToSideMenu("Déconnexion", FontImage.MATERIAL_EXIT_TO_APP, e -> new SignInForm(res).show());
+        tb.addMaterialCommandToSideMenu("Voiture", FontImage.MATERIAL_SHOPPING_CART, e -> new LoginForm(res).show());
+        tb.addMaterialCommandToSideMenu("Event", FontImage.MATERIAL_EXIT_TO_APP, e -> new LoginForm(res).show());
+        tb.addMaterialCommandToSideMenu("Astuce", FontImage.MATERIAL_EXIT_TO_APP, e -> new LoginForm(res).show());
+        tb.addMaterialCommandToSideMenu("Quiz", FontImage.MATERIAL_EXIT_TO_APP, e -> new LoginForm(res).show());
+        tb.addMaterialCommandToSideMenu("Payer Partenaire", FontImage.MATERIAL_EXIT_TO_APP, e -> new PaimentForm(res).show());
+        tb.addMaterialCommandToSideMenu("Déconnexion", FontImage.MATERIAL_EXIT_TO_APP, e -> new LoginForm(res).show());
 
     }
 }

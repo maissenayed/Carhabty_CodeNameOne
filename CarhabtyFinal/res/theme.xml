@@ -1,16 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <resource majorVersion="1" minorVersion="7" useXmlUI="false">
+    <image name="1.jpg"  />
     <image name="activation-background.jpg"  />
+    <image name="background.jpg"  />
+    <image name="bleu.jpg"  />
     <image name="confirmation-background.jpg"  />
     <image name="dog.jpg"  />
     <image name="facebook-logo.png" type="multi"  />
+    <image name="karhabty-logo copy.png"  />
     <image name="karhabty-logo.png"  />
-    <image name="Logo.png" type="multi"  />
+    <image name="logo-promo.jpg"  />
     <image name="news-item-1.jpg"  />
     <image name="news-item-2.jpg"  />
-    <image name="news-item-3.jpg"  />
-    <image name="news-item-4.jpg"  />
     <image name="news-item.jpg"  />
     <image name="news-tab-down-arrow.png" type="multi"  />
     <image name="news-tab-down.png" type="multi"  />
@@ -48,7 +50,6 @@
         <val key="Button.padding" value="2,2,2,2" />
         <val key="Button.press#align" value="4" />
         <border key="Button.press#border" type="round" roundBorderColor="12982329" opacity="255" strokeColor="0" strokeOpacity="255" strokeThickness="0.0" strokeMM="false" shadowSpread="10" shadowOpacity="0" shadowX="0.5" shadowY="0.5" shadowBlur="10.0" shadowMM="false" rectangle="true" />
-        <val key="Button.press#fgColor" value="ffffff" />
         <font key="Button.press#font" type="ttf" face="0" style="0" size="0" name="native:MainLight" family="native:MainLight" sizeSettings="3" actualSize="2.0" />
         <val key="Button.press#marUnit" value="2,2,2,2" />
         <val key="Button.press#margin" value="3,3,2,2" />
@@ -119,6 +120,8 @@
         <font key="Link.sel#font" type="ttf" face="0" style="0" size="0" name="native:MainLight" family="native:MainLight" sizeSettings="3" actualSize="2.5" />
         <val key="Link.sel#transparency" value="0" />
         <val key="Link.transparency" value="0" />
+        <val key="LoginForm.bgImage" value="background.jpg" />
+        <val key="LoginForm.bgType" value="1" />
         <val key="LogoLabel.align" value="4" />
         <val key="LogoLabel.fgColor" value="ffffff" />
         <font key="LogoLabel.font" type="ttf" face="0" style="0" size="0" name="native:MainLight" family="native:MainLight" sizeSettings="3" actualSize="3.0" />
@@ -226,7 +229,7 @@
         <val key="SideCommand.transparency" value="0" />
         <val key="SideNavigationPanel.bgColor" value="ffffff" />
         <val key="SideNavigationPanel.transparency" value="255" />
-        <val key="SignIn.bgImage" value="signin-background.jpg" />
+        <val key="SignIn.bgImage" value="background.jpg" />
         <val key="SignIn.bgType" value="33" />
         <val key="SignIn.margin" value="0,0,0,0" />
         <val key="SignIn.padUnit" value="0,0,2,0" />
@@ -254,7 +257,7 @@
         <val key="StatusBarSideMenu.padding" value="0,0,0,0" />
         <val key="TextField.align" value="4" />
         <border key="TextField.border" type="empty" />
-        <val key="TextField.fgColor" value="ffffff" />
+        <val key="TextField.fgColor" value="0" />
         <val key="TextField.margin" value="0,0,0,0" />
         <val key="TextField.padUnit" value="2,2,2,2" />
         <val key="TextField.padding" value="2,2,2,2" />

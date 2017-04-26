@@ -34,6 +34,7 @@ import com.codename1.ui.layouts.GridLayout;
 import com.codename1.ui.layouts.LayeredLayout;
 import com.codename1.ui.plaf.Style;
 import com.codename1.ui.util.Resources;
+import utils.Session;
 
 /**
  * The user profile form
@@ -54,7 +55,7 @@ public class ProfileForm extends SideMenuForm {
         
         tb.addSearchCommand(e -> {});
         
-        
+      
         Image img = res.getImage("profile-background.jpg");
         if(img.getHeight() > Display.getInstance().getDisplayHeight() / 3) {
             img = img.scaledHeight(Display.getInstance().getDisplayHeight() / 3);
@@ -63,44 +64,39 @@ public class ProfileForm extends SideMenuForm {
         sl.setUIID("BottomPad");
         sl.setBackgroundType(Style.BACKGROUND_IMAGE_SCALED_FILL);
 
-        Label facebook = new Label("786 followers", res.getImage("facebook-logo.png"), "BottomPad");
-        Label twitter = new Label("486 followers", res.getImage("twitter-logo.png"), "BottomPad");
-        facebook.setTextPosition(BOTTOM);
-        twitter.setTextPosition(BOTTOM);
+       
         
         add(LayeredLayout.encloseIn(
                 sl,
                 BorderLayout.south(
                     GridLayout.encloseIn(3, 
-                            facebook,
+                            
                             FlowLayout.encloseCenter(
-                                new Label(res.getImage("profile-pic.jpg"), "PictureWhiteBackgrond")),
-                            twitter
+                                new Label(res.getImage("profile-pic.jpg"), "PictureWhiteBackgrond"))
+                            
                     )
                 )
         ));
 
-        TextField username = new TextField("sandeep");
+        TextField username = new TextField(Session.getUser().getUsername());
         username.setUIID("TextFieldBlack");
         addStringValue("Username", username);
 
-        TextField email = new TextField("sandeep@gmail.com", "E-Mail", 20, TextField.EMAILADDR);
+        TextField email = new TextField(Session.getUser().getEmail(), "E-Mail", 20, TextField.EMAILADDR);
         email.setUIID("TextFieldBlack");
         addStringValue("E-Mail", email);
         
-        TextField password = new TextField("sandeep", "Password", 20, TextField.PASSWORD);
-        password.setUIID("TextFieldBlack");
-        addStringValue("Password", password);
+        TextField nom = new TextField(Session.getUser().getNom(), "Nom", 20, TextField.ANY);
+        nom.setUIID("TextFieldBlack");
+        addStringValue("Nom", nom);
 
-        CheckBox cb1 = CheckBox.createToggle(res.getImage("on-off-off.png"));
-        cb1.setUIID("Label");
-        cb1.setPressedIcon(res.getImage("on-off-on.png"));
-        CheckBox cb2 = CheckBox.createToggle(res.getImage("on-off-off.png"));
-        cb2.setUIID("Label");
-        cb2.setPressedIcon(res.getImage("on-off-on.png"));
+       
+        TextField prenom = new TextField(Session.getUser().getPrenom(), "Prenom", 20, TextField.ANY);
+        prenom.setUIID("TextFieldBlack");
+        addStringValue("Prenom", prenom);
         
-        addStringValue("Facebook", FlowLayout.encloseRightMiddle(cb1));
-        addStringValue("Twitter", FlowLayout.encloseRightMiddle(cb2));
+        
+        
     }
     
     private void addStringValue(String s, Component v) {

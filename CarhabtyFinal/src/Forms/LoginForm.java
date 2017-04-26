@@ -21,67 +21,72 @@ package Forms;
 
 import com.codename1.components.FloatingHint;
 import com.codename1.ui.Button;
+import static com.codename1.ui.Component.LEFT;
+import static com.codename1.ui.Component.RIGHT;
 import com.codename1.ui.Container;
 import com.codename1.ui.Display;
-import com.codename1.ui.Form;
+import com.codename1.ui.FontImage;
 import com.codename1.ui.Label;
 import com.codename1.ui.TextField;
-import com.codename1.ui.Toolbar;
 import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.layouts.BoxLayout;
 import com.codename1.ui.layouts.FlowLayout;
 import com.codename1.ui.util.Resources;
+import utils.Session;
 
 /**
- * Signup UI
+ * Sign in UI
  *
  * @author Shai Almog
  */
-public class SignUpForm extends SideMenuForm {
+public class LoginForm extends SideMenuForm {
 
-    public SignUpForm(Resources res) {
+    public LoginForm(Resources res) {
         super(new BorderLayout());
-        Toolbar tb = new Toolbar(true);
-        setToolbar(tb);
-        tb.setUIID("Container");
-        getTitleArea().setUIID("Container");
-        Form previous = Display.getInstance().getCurrent();
-        tb.setBackCommand("", e -> previous.showBack());
-        setUIID("SignIn");
-                
-        TextField username = new TextField("", "Username", 20, TextField.ANY);
-        TextField email = new TextField("", "E-Mail", 20, TextField.EMAILADDR);
-        TextField password = new TextField("", "Mot de passe", 20, TextField.PASSWORD);
-        TextField confirmPassword = new TextField("", "Confirmer mot de passe", 20, TextField.PASSWORD);
-        username.setSingleLineTextArea(false);
-        email.setSingleLineTextArea(false);
-        password.setSingleLineTextArea(false);
-        confirmPassword.setSingleLineTextArea(false);
-        Button next = new Button("Suivant");
-        Button signIn = new Button("Se connecter");
-        signIn.addActionListener(e -> previous.showBack());
-        signIn.setUIID("Lien");
-        Label alreadHaveAnAccount = new Label("Vous avez déja un compte ?");
         
+        if(!Display.getInstance().isTablet()) {
+            BorderLayout bl = (BorderLayout)getLayout();
+            bl.defineLandscapeSwap(BorderLayout.NORTH, BorderLayout.EAST);
+            bl.defineLandscapeSwap(BorderLayout.SOUTH, BorderLayout.CENTER);
+        }
+        getTitleArea().setUIID("Container");
+        setUIID("SignIn");
+        
+        add(BorderLayout.NORTH, new Label(res.getImage("karhabty-logo copy.png"), "LogoLabel"));
+       
+        TextField username = new TextField("", "Nom d'utilisateur", 20, TextField.EMAILADDR);
+        TextField password = new TextField("", "Mot de passe", 20, TextField.PASSWORD);
+        
+        username.getAllStyles().setMargin(LEFT, 0);
+        password.getAllStyles().setMargin(LEFT, 0);
+        Label loginIcon = new Label("", "TextField");
+        Label passwordIcon = new Label("", "TextField");
+        loginIcon.getAllStyles().setMargin(RIGHT, 0);
+        passwordIcon.getAllStyles().setMargin(RIGHT, 0);
+        FontImage.setMaterialIcon(loginIcon, FontImage.MATERIAL_PERSON_OUTLINE, 3);
+        FontImage.setMaterialIcon(passwordIcon, FontImage.MATERIAL_LOCK_OUTLINE, 3);
+        username.setSingleLineTextArea(false);
+        password.setSingleLineTextArea(false);
+        Button signIn = new Button("Se connecter");
+       
+       
         Container content = BoxLayout.encloseY(
-                new Label("S'inscrire", "LogoLabel"),
                 new FloatingHint(username),
-                createLineSeparator(),
-                new FloatingHint(email),
                 createLineSeparator(),
                 new FloatingHint(password),
                 createLineSeparator(),
-                new FloatingHint(confirmPassword),
-                createLineSeparator()
+                signIn
+               
         );
         content.setScrollableY(true);
-        add(BorderLayout.CENTER, content);
-        add(BorderLayout.SOUTH, BoxLayout.encloseY(
-                next,
-                FlowLayout.encloseCenter(alreadHaveAnAccount, signIn)
-        ));
-        next.requestFocus();
-      
+        add(BorderLayout.SOUTH, content);
+        signIn.requestFocus();
+        
+         signIn.addActionListener(e -> {
+            Session.Login(username.getText(), password.getText());
+
+        });
+     
     }
     
 }
