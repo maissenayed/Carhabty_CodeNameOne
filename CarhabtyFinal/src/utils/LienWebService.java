@@ -12,12 +12,12 @@ package utils;
 public class LienWebService {
     
     
-     public final static String LOGIN = "http://localhost/Carhabtyy/web/app_dev.php/oauth/v2/token";
-     public final static  String CUSER = "http://localhost/Carhabtyy/web/app_dev.php/api/Demo";
-     public final static  String OFFRE = "http://localhost/Carhabtyy/web/app_dev.php/services/listOffre";
-     public final static  String PRIX = "http://localhost/Carhabtyy/web/app_dev.php/services/getPrixFromRef";
-     public final static  String PARTNER = "http://localhost/Carhabtyy/web/app_dev.php/services/unpaidPartner";
-     public final static  String SETPAID = "http://localhost/Carhabtyy/web/app_dev.php/services/setPaidPartner";
+     public final static String LOGIN = "http://localhost/Carhabty/web/app_dev.php/oauth/v2/token";
+     public final static  String CUSER = "http://localhost/Carhabty/web/app_dev.php/api/Demo";
+     public final static  String OFFRE = "http://localhost/Carhabty/web/app_dev.php/services/listOffre";
+     public final static  String PRIX = "http://localhost/Carhabty/web/app_dev.php/services/getPrixFromRef";
+     public final static  String PARTNER = "http://localhost/Carhabty/web/app_dev.php/services/unpaidPartner";
+     public final static  String SETPAID = "http://localhost/Carhabty/web/app_dev.php/services/setPaidPartner";
      public final static String AFFICHAGE_VOITURE= "http://localhost/Carhabty/web/app_dev.php/api/jsonvoiture";
      public final static String INSERT_VOITURE= "http://localhost/Carhabty/web/app_dev.php/api/json/insert";
      public final static String AFFICHAGE_CAL= "http://localhost/Carhabty/web/app_dev.php/api/";
@@ -28,11 +28,11 @@ public class LienWebService {
      public final static String AFFICHAGE_EMAIL= "http://localhost/Carhabty/web/app_dev.php/api/json/email";
      
      
-     public final static String URL_RANDOM_QUIZ= "http://localhost/Carhabtyy/web/app_dev.php/quiz/quizz";
-     public final static String URL_SAVE_QUIZ= "http://localhost/Carhabtyy/web/app_dev.php/quiz/savequiz";
-     public final static String URL_GETCORRECT= "http://localhost/Carhabtyy/web/app_dev.php/quiz/getcorrectbytype";
-     public final static String URL_BYTYPE= "http://localhost/Carhabtyy/web/app_dev.php/quiz/getbytype";
-     public final static String URL_GET_LINECHART="http://localhost/Carhabtyy/web/app_dev.php/quiz/LineChart";
+     public final static String URL_RANDOM_QUIZ= "http://localhost/Carhabty/web/app_dev.php/quiz/quizz";
+     public final static String URL_SAVE_QUIZ= "http://localhost/Carhabty/web/app_dev.php/quiz/savequiz";
+     public final static String URL_GETCORRECT= "http://localhost/Carhabty/web/app_dev.php/quiz/getcorrectbytype";
+     public final static String URL_BYTYPE= "http://localhost/Carhabty/web/app_dev.php/quiz/getbytype";
+     public final static String URL_GET_LINECHART="http://localhost/Carhabty/web/app_dev.php/quiz/LineChart";
      
      
      
