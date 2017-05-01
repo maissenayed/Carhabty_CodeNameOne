@@ -152,7 +152,9 @@ public class PaimentForm extends SideMenuForm {
 
                         somme = somme + prix;
                         System.out.println(somme);
-                        l3.setText("somme à payer : " + somme.toString());
+                        l3.setText("somme à payer : " + somme.toString()+" DT");
+                      
+                         this.animateLayout(0);
                         for (int i = 0; i < test.size(); i++) {
 
                             System.out.println(test.get(i));
@@ -169,27 +171,28 @@ public class PaimentForm extends SideMenuForm {
                 ToastBar.showErrorMessage("référence coupon déja pris en compte");
 
             }
-        this.refreshTheme();});
+      });
 
           b1.addActionListener((evt) -> {
-                 MyNewRequest mnr = new MyNewRequest(LienWebService.PRIX);
+              System.out.println(Session.getPartner().getId());
+                MyNewRequest mnr = new MyNewRequest(LienWebService.SETPAID);
                 mnr.getConnectionRequest().setPost(true);            
-                mnr.getConnectionRequest().addArgument("id",String.valueOf(Session.getUser().getId()));             
+                mnr.getConnectionRequest().addArgument("id",String.valueOf(Session.getPartner().getId()));             
                 mnr.getConnectionRequest().addResponseListener((NetworkEvent e) -> {
-              
-                    System.out.println(Session.getPartner().getId());
-                      System.out.println(new String(mnr.getConnectionRequest().getResponseData()).toCharArray());
+                   
                    });
                 NetworkManager.getInstance().addToQueue(mnr.getConnectionRequest());
-      
+                    
     
-          
-          this.refreshTheme();
+                  ToastBar.showErrorMessage("Partenaire Payé avec succées");
+                  new UnpaidPartnerForm(res).show();
+                
           });
     
     }
 
     private void addStringValue(String s, Component v) {
+        
         add(BorderLayout.west(new Label(s, "PaddedLabel")).
                 add(BorderLayout.SOUTH, v));
     

@@ -83,13 +83,15 @@ public class Session {
                             Map<String, Object> json = j.parseJSON(new CharArrayReader(new String(mnr.getConnectionRequest().getResponseData()).toCharArray()));                     
                             User user = new User();  
                             user.setEmail((String) json.get("email"));
+                            user.setId(((Double)json.get("id")).intValue());
                             user.setNom((String) json.get("nom"));
                             user.setPrenom((String) json.get("prenom"));
                             user.setUsername((String) json.get("username"));
                             user.setImage((String) json.get("photo"));
-                            //user.setRole((String) json.get("role"));
+                           
                             
                             Session.setUser(user);
+                          
                             Access();
                         } catch (IOException ex) {
 

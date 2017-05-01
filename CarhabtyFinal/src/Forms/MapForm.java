@@ -59,7 +59,7 @@ public class MapForm extends SideMenuForm {
         Toolbar tb = new Toolbar(true);
         setToolbar(tb);
         getTitleArea().setUIID("Container");
-        setTitle("Nos offres");
+        setTitle("Carhabty");
         getContentPane().setScrollVisible(false);
         
         super.addSideMenu(res);
@@ -69,7 +69,7 @@ public class MapForm extends SideMenuForm {
 
         Label spacer1 = new Label();
         Label spacer2 = new Label();
-        addTab(swipe, res.getImage("logo-promo.jpg"), spacer1, "", "", "Localisation des Partenaires");
+        addTab(swipe, res.getImage("noir.jpg"), spacer1, "", "", "");
       
         
         
@@ -96,45 +96,23 @@ public class MapForm extends SideMenuForm {
         FlowLayout flow = new FlowLayout(CENTER);
         flow.setValign(BOTTOM);
         Container radioContainer = new Container(flow);
-        for(int iter = 0 ; iter < rbs.length ; iter++) {
-            rbs[iter] = RadioButton.createToggle(unselectedWalkthru, bg);
-            rbs[iter].setPressedIcon(selectedWalkthru);
-            rbs[iter].setUIID("Label");
-            radioContainer.add(rbs[iter]);
-        }
-                
-        rbs[0].setSelected(true);
-        swipe.addSelectionListener((i, ii) -> {
-            if(!rbs[ii].isSelected()) {
-                rbs[ii].setSelected(true);
-            }
-        });
+      
         
         Component.setSameSize(radioContainer, spacer1, spacer2);
         add(LayeredLayout.encloseIn(swipe, radioContainer));
         
         ButtonGroup barGroup = new ButtonGroup();
-        RadioButton offre = RadioButton.createToggle("offres", barGroup);
+        RadioButton offre = RadioButton.createToggle("Localisation des Partenaires", barGroup);
         offre.setUIID("SelectBar");
        
        
-        Label arrow = new Label(res.getImage("news-tab-down-arrow.png"), "Container");
-        
+       
         add(LayeredLayout.encloseIn(
-                GridLayout.encloseIn(1, offre),
-                FlowLayout.encloseBottom(arrow)
+                GridLayout.encloseIn(1, offre)
+                
         ));
         
        
-        
-       
-       
-        
-       
-        
-       
-        
-   
    }
     
   
@@ -152,8 +130,8 @@ public class MapForm extends SideMenuForm {
 
         Label comments = new Label(commentsStr);
        
-        if(img.getHeight() > Display.getInstance().getDisplayHeight() / 2) {
-            img = img.scaledHeight(Display.getInstance().getDisplayHeight() / 2);
+        if(img.getHeight() > Display.getInstance().getDisplayHeight() / 6) {
+            img = img.scaledHeight(Display.getInstance().getDisplayHeight() / 6);
         }
         ScaleImageLabel image = new ScaleImageLabel(img);
         image.setUIID("Container");
@@ -176,39 +154,7 @@ public class MapForm extends SideMenuForm {
         swipe.addTab("", page1);
     }
     
-   private void addButton(Image img, String title, boolean liked, float likeCount, float commentCount) {
-       int height = Display.getInstance().convertToPixels(11.5f);
-       int width = Display.getInstance().convertToPixels(14f);
-       Button image = new Button(img.fill(width, height));
-       image.setUIID("Label");
-       Container cnt = BorderLayout.west(image);
-       cnt.setLeadComponent(image);
-       TextArea ta = new TextArea(title);
-       ta.setUIID("NewsTopLine");
-       ta.setEditable(false);
-
-       Label likes = new Label(likeCount + " DT  ", "NewsBottomLine");
-       likes.setTextPosition(RIGHT);
-       if(!liked) {
-           FontImage.setMaterialIcon(likes, FontImage.MATERIAL_MONEY_OFF);
-       } else {
-           Style s = new Style(likes.getUnselectedStyle());
-           s.setFgColor(0xff2d55);
-           FontImage heartImage = FontImage.createMaterial(FontImage.MATERIAL_MONEY_OFF, s);
-           likes.setIcon(heartImage);
-       }
-       Label comments = new Label(commentCount + " %", "NewsBottomLine");
-       FontImage.setMaterialIcon(likes, FontImage.MATERIAL_CHAT);
-       
-       
-       cnt.add(BorderLayout.CENTER, 
-               BoxLayout.encloseY(
-                       ta,
-                       BoxLayout.encloseX(likes, comments)
-               ));
-       add(cnt);
-       image.addActionListener(e -> ToastBar.showMessage(title, FontImage.MATERIAL_INFO));
-   }
+  
     
   
     }
