@@ -79,17 +79,14 @@ public class Session {
                         try {
                             
                              JSONParser j = new JSONParser();
-                             Map<String, Object> offres = j.parseJSON(new CharArrayReader(new String(mnr.getConnectionRequest().getResponseData()).toCharArray()));
-                                
-                            
-                            System.out.println(new String(mnr.getConnectionRequest().getResponseData()));
-                           
-                            Map<String, Object> json = jp.parseJSON(new CharArrayReader(new String(mnr.getConnectionRequest().getResponseData()).toCharArray()));                     
+                       
+                            Map<String, Object> json = j.parseJSON(new CharArrayReader(new String(mnr.getConnectionRequest().getResponseData()).toCharArray()));                     
                             User user = new User();  
                             user.setEmail((String) json.get("email"));
                             user.setNom((String) json.get("nom"));
                             user.setPrenom((String) json.get("prenom"));
                             user.setUsername((String) json.get("username"));
+                            user.setImage((String) json.get("photo"));
                             //user.setRole((String) json.get("role"));
                             
                             Session.setUser(user);
@@ -140,8 +137,21 @@ public class Session {
         return cr;
 
     }
-    private static User user;
+    private static User user,partner;
 
+    
+    
+    
+     public static User getPartner() {
+        return partner;
+    }
+
+    public static void setPartner(User user) {
+        Session.partner = user;
+    }
+    
+    
+    
     public static User getUser() {
         return user;
     }

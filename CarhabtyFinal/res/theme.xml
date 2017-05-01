@@ -1,25 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <resource majorVersion="1" minorVersion="7" useXmlUI="false">
-    <image name="1.jpg"  />
     <image name="activation-background.jpg"  />
     <image name="background.jpg"  />
-    <image name="bleu.jpg"  />
+    <image name="badgeQ1.png"  />
+    <image name="badgeQ10.png"  />
+    <image name="badgeQ2.png"  />
+    <image name="badgeQ3.png"  />
+    <image name="badgeQ4.png"  />
+    <image name="badgeQ5.png"  />
+    <image name="badgeQ6.png"  />
+    <image name="badgeQ7.png"  />
+    <image name="badgeQ8.png"  />
+    <image name="badgeQ9.png"  />
+    <data name="Cheerful-marimba-music-melody-loop.mp3" />
+    <image name="config-logo.png"  />
     <image name="confirmation-background.jpg"  />
     <image name="dog.jpg"  />
-    <image name="facebook-logo.png" type="multi"  />
+    <image name="dude.jpg"  />
+    <image name="ico-4.png"  />
     <image name="karhabty-logo copy.png"  />
-    <image name="karhabty-logo.png"  />
-    <image name="logo-promo.jpg"  />
     <image name="news-item-1.jpg"  />
     <image name="news-item-2.jpg"  />
     <image name="news-item.jpg"  />
     <image name="news-tab-down-arrow.png" type="multi"  />
     <image name="news-tab-down.png" type="multi"  />
+    <image name="noir.jpg"  />
     <image name="on-off-off.png" type="multi"  />
     <image name="on-off-on.png" type="multi"  />
     <image name="profile-background.jpg"  />
     <image name="profile-pic.jpg" type="multi"  />
+    <image name="quizBg.png"  />
     <image name="signin-background.jpg"  />
     <image name="signup-background.jpg"  />
     <image name="smily.png" type="multi"  />
@@ -40,6 +51,54 @@
         <val key="BottomPad.padUnit" value="0,0,2,0" />
         <val key="BottomPad.padding" value="0,0,0,0" />
         <val key="BottomPad.transparency" value="0" />
+        <val key="BtnChoix.align" value="4" />
+        <val key="BtnChoix.bgColor" value="2980b9" />
+        <val key="BtnChoix.dis#align" value="4" />
+        <val key="BtnChoix.dis#bgColor" value="2980b9" />
+        <val key="BtnChoix.dis#fgColor" value="ffffff" />
+        <val key="BtnChoix.dis#transparency" value="255" />
+        <val key="BtnChoix.fgColor" value="ffffff" />
+        <val key="BtnChoix.press#align" value="4" />
+        <val key="BtnChoix.press#bgColor" value="2980b9" />
+        <val key="BtnChoix.press#fgColor" value="ffffff" />
+        <val key="BtnChoix.press#transparency" value="255" />
+        <val key="BtnChoix.transparency" value="255" />
+        <val key="BtnFail.align" value="4" />
+        <val key="BtnFail.bgColor" value="e67e22" />
+        <val key="BtnFail.dis#align" value="4" />
+        <val key="BtnFail.dis#bgColor" value="e67e22" />
+        <val key="BtnFail.dis#fgColor" value="ffffff" />
+        <val key="BtnFail.dis#transparency" value="255" />
+        <val key="BtnFail.fgColor" value="ffffff" />
+        <val key="BtnFail.press#align" value="4" />
+        <val key="BtnFail.press#bgColor" value="e67e22" />
+        <val key="BtnFail.press#fgColor" value="ffffff" />
+        <val key="BtnFail.press#transparency" value="255" />
+        <val key="BtnFail.transparency" value="255" />
+        <val key="BtnSelect.align" value="4" />
+        <val key="BtnSelect.bgColor" value="66ffff" />
+        <val key="BtnSelect.dis#align" value="4" />
+        <val key="BtnSelect.dis#bgColor" value="66ffff" />
+        <val key="BtnSelect.dis#fgColor" value="ffffff" />
+        <val key="BtnSelect.dis#transparency" value="255" />
+        <val key="BtnSelect.fgColor" value="ffffff" />
+        <val key="BtnSelect.press#align" value="4" />
+        <val key="BtnSelect.press#bgColor" value="66ffff" />
+        <val key="BtnSelect.press#fgColor" value="ffffff" />
+        <val key="BtnSelect.press#transparency" value="255" />
+        <val key="BtnSelect.transparency" value="255" />
+        <val key="BtnSucces.align" value="4" />
+        <val key="BtnSucces.bgColor" value="27ae60" />
+        <val key="BtnSucces.dis#align" value="4" />
+        <val key="BtnSucces.dis#bgColor" value="27ae60" />
+        <val key="BtnSucces.dis#fgColor" value="ffffff" />
+        <val key="BtnSucces.dis#transparency" value="255" />
+        <val key="BtnSucces.fgColor" value="ffffff" />
+        <val key="BtnSucces.press#align" value="4" />
+        <val key="BtnSucces.press#bgColor" value="27ae60" />
+        <val key="BtnSucces.press#fgColor" value="ffffff" />
+        <val key="BtnSucces.press#transparency" value="255" />
+        <val key="BtnSucces.transparency" value="255" />
         <val key="Button.align" value="4" />
         <border key="Button.border" type="round" roundBorderColor="16723285" opacity="255" strokeColor="0" strokeOpacity="255" strokeThickness="0.0" strokeMM="false" shadowSpread="10" shadowOpacity="0" shadowX="0.5" shadowY="0.5" shadowBlur="10.0" shadowMM="false" rectangle="true" />
         <val key="Button.fgColor" value="ffffff" />
@@ -108,6 +167,11 @@
         <val key="Label.fgColor" value="a2a1b8" />
         <font key="Label.font" type="ttf" face="0" style="0" size="0" name="native:MainLight" family="native:MainLight" sizeSettings="3" actualSize="2.5" />
         <val key="Label.transparency" value="0" />
+        <val key="LabelGarci.align" value="4" />
+        <val key="LabelGarci.bgColor" value="ffffff" />
+        <val key="LabelGarci.fgColor" value="022660" />
+        <font key="LabelGarci.font" type="ttf" face="32" style="1" size="16" name="native:MainRegular" family="native:MainRegular" sizeSettings="1" actualSize="12.0" />
+        <val key="LabelGarci.transparency" value="255" />
         <val key="LargeWhiteText.align" value="1" />
         <val key="LargeWhiteText.fgColor" value="ffffff" />
         <font key="LargeWhiteText.font" type="ttf" face="0" style="0" size="0" name="native:MainLight" family="native:MainLight" sizeSettings="3" actualSize="3.5" />

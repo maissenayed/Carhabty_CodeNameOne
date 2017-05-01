@@ -22,7 +22,7 @@ public class User {
     private String nomSociete;
     private String activite;
     private String siret;
-    private Image image;
+    private String image;
   
 
     
@@ -199,11 +199,11 @@ public class User {
         this.activite = activite;
     }
     
-     public Image getImage() {
+     public String getImage() {
         return image;
     }
 
-    public void setImage(Image image) {
+    public void setImage(String image) {
         this.image = image;
     } 
 

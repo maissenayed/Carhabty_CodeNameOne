@@ -69,7 +69,7 @@ public class OffreForm extends SideMenuForm {
 
         Label spacer1 = new Label();
         Label spacer2 = new Label();
-        addTab(swipe, res.getImage("logo-promo.jpg"), spacer1, "", "", "Toutes les nouvelles offres dans Carhabty ");
+        addTab(swipe, res.getImage("noir.jpg"), spacer1, "", "", "");
       
         
         
@@ -92,23 +92,11 @@ public class OffreForm extends SideMenuForm {
         g.setColor(0xffffff);
         g.setAntiAliased(true);
         g.fillArc(0, 0, size, size, 0, 360);
-        RadioButton[] rbs = new RadioButton[swipe.getTabCount()];
+       
         FlowLayout flow = new FlowLayout(CENTER);
         flow.setValign(BOTTOM);
         Container radioContainer = new Container(flow);
-        for(int iter = 0 ; iter < rbs.length ; iter++) {
-            rbs[iter] = RadioButton.createToggle(unselectedWalkthru, bg);
-            rbs[iter].setPressedIcon(selectedWalkthru);
-            rbs[iter].setUIID("Label");
-            radioContainer.add(rbs[iter]);
-        }
-                
-        rbs[0].setSelected(true);
-        swipe.addSelectionListener((i, ii) -> {
-            if(!rbs[ii].isSelected()) {
-                rbs[ii].setSelected(true);
-            }
-        });
+        
         
         Component.setSameSize(radioContainer, spacer1, spacer2);
         add(LayeredLayout.encloseIn(swipe, radioContainer));
@@ -118,28 +106,15 @@ public class OffreForm extends SideMenuForm {
         offre.setUIID("SelectBar");
        
        
-        Label arrow = new Label(res.getImage("news-tab-down-arrow.png"), "Container");
+        
         
         add(LayeredLayout.encloseIn(
-                GridLayout.encloseIn(1, offre),
-                FlowLayout.encloseBottom(arrow)
+                GridLayout.encloseIn(1, offre)
+               
         ));
         
         offre.setSelected(true);
-        arrow.setVisible(false);
-        addShowListener(e -> {
-            arrow.setVisible(true);
-            updateArrowPosition(offre, arrow);
-        });
-        bindButtonSelection(offre, arrow);
-       
-       
-        
-        // special case for rotation
-        addOrientationListener(e -> {
-            updateArrowPosition(barGroup.getRadioButton(barGroup.getSelectedIndex()), arrow);
-        });
-        
+     
         
         OffreController op = new OffreController();
         ConnectionRequest req = new ConnectionRequest();
@@ -156,19 +131,16 @@ public class OffreForm extends SideMenuForm {
              
             addButton(res.getImage("news-item-1.jpg"), nom, false, prix, reduction);         
        }            
-    }
+    
+            }
  });
         
         NetworkManager.getInstance().addToQueue(req);
+   
+  
+ }
     
-    }
-    
-    private void updateArrowPosition(Button b, Label arrow) {
-        arrow.getUnselectedStyle().setMargin(LEFT, b.getX() + b.getWidth() / 2 - arrow.getWidth() / 2);
-        arrow.getParent().repaint();
-        
-        
-    }
+  
     
     private void addTab(Tabs swipe, Image img, Label spacer, String likesStr, String commentsStr, String text) {
         int size = Math.min(Display.getInstance().getDisplayWidth(), Display.getInstance().getDisplayHeight());
@@ -184,8 +156,8 @@ public class OffreForm extends SideMenuForm {
 
         Label comments = new Label(commentsStr);
        
-        if(img.getHeight() > Display.getInstance().getDisplayHeight() / 2) {
-            img = img.scaledHeight(Display.getInstance().getDisplayHeight() / 2);
+        if(img.getHeight() > Display.getInstance().getDisplayHeight() / 6) {
+            img = img.scaledHeight(Display.getInstance().getDisplayHeight() / 6);
         }
         ScaleImageLabel image = new ScaleImageLabel(img);
         image.setUIID("Container");
@@ -240,15 +212,8 @@ public class OffreForm extends SideMenuForm {
                ));
        add(cnt);
        image.addActionListener(e -> ToastBar.showMessage(title, FontImage.MATERIAL_INFO));
+  this.animateLayout(0);
    }
     
-    private void bindButtonSelection(Button b, Label arrow) {
-        b.addActionListener(e -> {
-            if(b.isSelected()) {
-                
-                updateArrowPosition(b, arrow);
-                
-            }
-        });
-    }
+   
 }
