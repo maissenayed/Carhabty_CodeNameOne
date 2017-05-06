@@ -48,6 +48,10 @@ import com.codename1.ui.layouts.GridLayout;
 import com.codename1.ui.layouts.LayeredLayout;
 import com.codename1.ui.plaf.Style;
 import com.codename1.ui.util.Resources;
+import com.restfb.DefaultFacebookClient;
+import com.restfb.FacebookClient;
+import com.restfb.Parameter;
+import com.restfb.types.FacebookType;
 import java.util.ArrayList;
 import utils.LienWebService;
 import utils.Session;
@@ -213,13 +217,19 @@ public class EventForm extends SideMenuForm {
                        BoxLayout.encloseX(likes, comments)
                ));
        add(cnt);
-       image.addActionListener(e -> System.out.println("jhsfdhjsd")
-       
-       
-       
-       
-       //tu fais 
-       
+       image.addActionListener(e -> {
+                             
+              
+                     String accessToken = "EAACEdEose0cBAAlX3alzLhwzUIV35zE1LxoLQ2wmnjzKh6v7xfOYUSZAeg6lZA5c9ZBI1zJ1tJiW56TwZBsaALmq0Phy6m6Mk4LIdwoxABATniGKnytrv5pr0ovDKrLgjzHPD0YFjs6pen6qCDwrUgif7IkhXGx2jaDZA9iSIZBYwNtjrv9yBU";
+        
+           
+                     FacebookClient fbClient= new DefaultFacebookClient(accessToken);
+                     FacebookType response = fbClient.publish("me/feed", FacebookType.class,
+                     Parameter.with("message", "Vous êtes invités à l'évènement " )
+         );
+         System.out.println("Votre evenement à été publié sur facebook");
+         System.out.println("fb.com/"+response.getId()); 
+                    }
        
        
        
