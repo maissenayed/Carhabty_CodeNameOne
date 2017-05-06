@@ -1,5 +1,6 @@
 package Controllers;
 
+import Entity.Event;
 import Entity.Offre;
 import com.codename1.io.CharArrayReader;
 import com.codename1.io.JSONParser;
@@ -8,55 +9,27 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class OffreController {
+public class AstuceController {
 
   
-    public ArrayList<Offre> getListOffre(String json) {
+    public ArrayList<Event> getListEvent(String json) {
 
-        ArrayList<Offre> ListOffres = new ArrayList<>();
+        ArrayList<Event> ListEvent = new ArrayList<>();
         try {
             JSONParser j = new JSONParser();
-            Map<String, Object> offres = j.parseJSON(new CharArrayReader(json.toCharArray()));
-            List<Map<String, Object>> list = (List<Map<String, Object>>) offres.get("offre");
+            Map<String, Object> event = j.parseJSON(new CharArrayReader(json.toCharArray()));
+            List<Map<String, Object>> list = (List<Map<String, Object>>) event.get("event");
             for (Map<String, Object> obj : list) {
-                Offre o = new Offre();
-                o.setReduction(Float.parseFloat(obj.get("reduction").toString()));
-                o.setNomOffre(obj.get("nomoffre").toString());
-                o.setPrix(Float.parseFloat(obj.get("prix").toString()));
-                o.setImage(obj.get("image").toString());
-                ListOffres.add(o);
-            }
-        } catch (IOException ex) {
-        }
-        return ListOffres;
-    }
-
-
-      public int getPrix(String json) {
-
-       
-        try {
-            JSONParser j = new JSONParser();
-            Map<String, Object> offres = j.parseJSON(new CharArrayReader(json.toCharArray()));
-            List<Map<String, Object>> list = (List<Map<String, Object>>) offres.get("offre");
-            for (Map<String, Object> obj : list) {
-                Offre o = new Offre();
-                o.setReduction(Float.parseFloat(obj.get("reduction").toString()));
-                o.setNomOffre(obj.get("nomoffre").toString());
-                o.setPrix(Float.parseFloat(obj.get("prix").toString()));
-                o.setImage(obj.get("image").toString());
+                Event o = new Event();
                 
+                o.setTitle(obj.get("title").toString());         
+                o.setDescription(obj.get("description").toString());
+                o.setAdresse(obj.get("address").toString());
+               
+                ListEvent.add(o);
             }
         } catch (IOException ex) {
         }
-        return 0;
+        return ListEvent;
     }
-
-
-
-
-
-
-
-
 }

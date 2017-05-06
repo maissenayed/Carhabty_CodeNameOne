@@ -19,6 +19,7 @@
 
 package Forms;
 
+import Controllers.EventController;
 import Controllers.OffreController;
 import com.codename1.components.ScaleImageLabel;
 import com.codename1.components.SpanLabel;
@@ -52,9 +53,9 @@ import utils.LienWebService;
 import utils.Session;
 
 
-public class OffreForm extends SideMenuForm {
+public class AstuceForm extends SideMenuForm {
 
-    public OffreForm(Resources res) {
+    public AstuceForm(Resources res) {
         super("Newsfeed", BoxLayout.y());
         Toolbar tb = new Toolbar(true);
         setToolbar(tb);
@@ -116,20 +117,20 @@ public class OffreForm extends SideMenuForm {
         offre.setSelected(true);
      
         
-        OffreController op = new OffreController();
+        EventController op = new EventController();
         ConnectionRequest req = new ConnectionRequest();
-        req.setUrl(LienWebService.OFFRE);    
+        req.setUrl(LienWebService.EVENTJSON);    
         req.addResponseListener(new ActionListener<NetworkEvent>() {
             @Override
             public void actionPerformed(NetworkEvent evt) {
-                op.getListOffre(new String(req.getResponseData()));
-                   for(int i=0; i< op.getListOffre(new String(req.getResponseData())).size();i++){
+                op.getListEvent(new String(req.getResponseData()));
+                   for(int i=0; i< op.getListEvent(new String(req.getResponseData())).size();i++){
         
-            String nom = op.getListOffre(new String(req.getResponseData())).get(i).getNomOffre();
-            float prix = op.getListOffre(new String(req.getResponseData())).get(i).getPrix();
-            float reduction =op.getListOffre(new String(req.getResponseData())).get(i).getReduction();
+            String nom = op.getListEvent(new String(req.getResponseData())).get(i).getTitle();
+            String desc = op.getListEvent(new String(req.getResponseData())).get(i).getDescription();
+            String addresse =op.getListEvent(new String(req.getResponseData())).get(i).getAdresse();
              
-            addButton(res.getImage("news-item-1.jpg"), nom, false, prix, reduction);         
+            addButton(res.getImage("news-item-1.jpg"), nom, false, desc, addresse);         
        }            
     
             }
@@ -180,7 +181,7 @@ public class OffreForm extends SideMenuForm {
         swipe.addTab("", page1);
     }
     
-   private void addButton(Image img, String title, boolean liked, float likeCount, float commentCount) {
+   private void addButton(Image img, String title, boolean liked, String likeCount, String commentCount) {
        int height = Display.getInstance().convertToPixels(11.5f);
        int width = Display.getInstance().convertToPixels(14f);
        Button image = new Button(img.fill(width, height));

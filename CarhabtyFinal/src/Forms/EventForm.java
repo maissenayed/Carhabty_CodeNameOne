@@ -19,6 +19,7 @@
 
 package Forms;
 
+import Controllers.EventController;
 import Controllers.OffreController;
 import com.codename1.components.ScaleImageLabel;
 import com.codename1.components.SpanLabel;
@@ -52,14 +53,14 @@ import utils.LienWebService;
 import utils.Session;
 
 
-public class OffreForm extends SideMenuForm {
+public class EventForm extends SideMenuForm {
 
-    public OffreForm(Resources res) {
+    public EventForm(Resources res) {
         super("Newsfeed", BoxLayout.y());
         Toolbar tb = new Toolbar(true);
         setToolbar(tb);
         getTitleArea().setUIID("Container");
-        setTitle("Nos offres");
+        setTitle("Nos Evénements");
         getContentPane().setScrollVisible(false);
         
         super.addSideMenu(res);
@@ -102,7 +103,7 @@ public class OffreForm extends SideMenuForm {
         add(LayeredLayout.encloseIn(swipe, radioContainer));
         
         ButtonGroup barGroup = new ButtonGroup();
-        RadioButton offre = RadioButton.createToggle("offres", barGroup);
+        RadioButton offre = RadioButton.createToggle("Evénements", barGroup);
         offre.setUIID("SelectBar");
        
        
@@ -116,20 +117,21 @@ public class OffreForm extends SideMenuForm {
         offre.setSelected(true);
      
         
-        OffreController op = new OffreController();
+        EventController op = new EventController();
         ConnectionRequest req = new ConnectionRequest();
-        req.setUrl(LienWebService.OFFRE);    
+        req.setUrl(LienWebService.EVENTJSON); 
+        req.setPost(true);
         req.addResponseListener(new ActionListener<NetworkEvent>() {
             @Override
             public void actionPerformed(NetworkEvent evt) {
-                op.getListOffre(new String(req.getResponseData()));
-                   for(int i=0; i< op.getListOffre(new String(req.getResponseData())).size();i++){
+                op.getListEvent(new String(req.getResponseData()));
+                   for(int i=0; i< op.getListEvent(new String(req.getResponseData())).size();i++){
         
-            String nom = op.getListOffre(new String(req.getResponseData())).get(i).getNomOffre();
-            float prix = op.getListOffre(new String(req.getResponseData())).get(i).getPrix();
-            float reduction =op.getListOffre(new String(req.getResponseData())).get(i).getReduction();
+            String nom = op.getListEvent(new String(req.getResponseData())).get(i).getTitle();
+            String desc = op.getListEvent(new String(req.getResponseData())).get(i).getDescription();
+            String addresse =op.getListEvent(new String(req.getResponseData())).get(i).getAdresse();
              
-            addButton(res.getImage("news-item-1.jpg"), nom, false, prix, reduction);         
+            addButton(res.getImage("news-item-1.jpg"), nom, false, desc, addresse);         
        }            
     
             }
@@ -180,7 +182,7 @@ public class OffreForm extends SideMenuForm {
         swipe.addTab("", page1);
     }
     
-   private void addButton(Image img, String title, boolean liked, float likeCount, float commentCount) {
+   private void addButton(Image img, String title, boolean liked, String likeCount, String commentCount) {
        int height = Display.getInstance().convertToPixels(11.5f);
        int width = Display.getInstance().convertToPixels(14f);
        Button image = new Button(img.fill(width, height));
@@ -191,7 +193,7 @@ public class OffreForm extends SideMenuForm {
        ta.setUIID("NewsTopLine");
        ta.setEditable(false);
 
-       Label likes = new Label(likeCount + " DT  ", "NewsBottomLine");
+       Label likes = new Label(likeCount + "   ", "NewsBottomLine");
        likes.setTextPosition(RIGHT);
        if(!liked) {
            FontImage.setMaterialIcon(likes, FontImage.MATERIAL_MONEY_OFF);
@@ -201,7 +203,7 @@ public class OffreForm extends SideMenuForm {
            FontImage heartImage = FontImage.createMaterial(FontImage.MATERIAL_MONEY_OFF, s);
            likes.setIcon(heartImage);
        }
-       Label comments = new Label(commentCount + " %", "NewsBottomLine");
+       Label comments = new Label(commentCount + " ", "NewsBottomLine");
        FontImage.setMaterialIcon(likes, FontImage.MATERIAL_CHAT);
        
        
@@ -211,7 +213,18 @@ public class OffreForm extends SideMenuForm {
                        BoxLayout.encloseX(likes, comments)
                ));
        add(cnt);
-       image.addActionListener(e -> ToastBar.showMessage(title, FontImage.MATERIAL_INFO));
+       image.addActionListener(e -> System.out.println("jhsfdhjsd")
+       
+       
+       
+       
+       //tu fais 
+       
+       
+       
+       
+       
+       );
   this.animateLayout(0);
    }
     

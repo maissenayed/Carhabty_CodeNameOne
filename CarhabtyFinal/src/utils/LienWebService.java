@@ -33,6 +33,9 @@ public class LienWebService {
      public final static String URL_GETCORRECT= "http://localhost/Carhabty/web/app_dev.php/quiz/getcorrectbytype";
      public final static String URL_BYTYPE= "http://localhost/Carhabty/web/app_dev.php/quiz/getbytype";
      public final static String URL_GET_LINECHART="http://localhost/Carhabty/web/app_dev.php/quiz/LineChart";
+     public final static String EVENTJSON="http://localhost/Carhabty_Web/Carhabty/web/app_dev.php/event/json";
+     
+     
      
      
      
