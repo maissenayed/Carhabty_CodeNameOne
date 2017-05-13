@@ -69,8 +69,8 @@ public class SideMenuForm extends Form {
         tb.addMaterialCommandToSideMenu("Localisation", FontImage.MATERIAL_ACCESSIBILITY, e ->{ MusicGame.getInstance().stop(); new MapForm(res).show();});
        // tb.addMaterialCommandToSideMenu("Partenaire non payé", FontImage.MATERIAL_ACCESSIBILITY, e -> new UnpaidPartnerForm(res).show());
         tb.addMaterialCommandToSideMenu("Voiture", FontImage.MATERIAL_SHOPPING_CART, e -> { MusicGame.getInstance().stop(); new VoitureForm(res).show();});
-        tb.addMaterialCommandToSideMenu("Event", FontImage.MATERIAL_EXIT_TO_APP, e -> { MusicGame.getInstance().stop();new LoginForm(res).show();});
-        tb.addMaterialCommandToSideMenu("Astuce", FontImage.MATERIAL_EXIT_TO_APP, e -> { MusicGame.getInstance().stop();new LoginForm(res).show();});
+        tb.addMaterialCommandToSideMenu("Event", FontImage.MATERIAL_EXIT_TO_APP, e -> { MusicGame.getInstance().stop();new EventForm(res).show();});
+        tb.addMaterialCommandToSideMenu("Astuce", FontImage.MATERIAL_EXIT_TO_APP, e -> { MusicGame.getInstance().stop();new AstuceForm(res).show();});
         tb.addMaterialCommandToSideMenu("Quiz", FontImage.MATERIAL_EXIT_TO_APP, e -> { MusicGame.getInstance().stop();new QuizForm(res).show();});
         tb.addMaterialCommandToSideMenu("Déconnexion", FontImage.MATERIAL_EXIT_TO_APP, e -> { MusicGame.getInstance().stop();new LoginForm(res).show();});
 
