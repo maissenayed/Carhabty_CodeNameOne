@@ -100,11 +100,11 @@ public Form createPieChartForm() {
     renderer.setChartTitleTextSize(20);
     renderer.setDisplayValues(true);
     renderer.setShowLabels(true);
-    SimpleSeriesRenderer r = renderer.getSeriesRendererAt(0);
+  /*  SimpleSeriesRenderer r = renderer.getSeriesRendererAt(0);
     r.setGradientEnabled(true);
     r.setGradientStart(0, ColorUtil.BLUE);
     r.setGradientStop(0, ColorUtil.GREEN);
-    r.setHighlighted(true);
+    r.setHighlighted(true);*/
 
     // Create the chart ... pass the values and renderer to the chart object.
     PieChart chart = new PieChart(buildCategoryDataset("Project budget", values), renderer);

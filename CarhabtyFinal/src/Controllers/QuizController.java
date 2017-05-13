@@ -16,8 +16,9 @@ import java.util.List;
 import com.codename1.db.Cursor;
 import com.codename1.db.Database;
 import com.codename1.db.Row;
-import com.codename1.ui.Label;
 import java.io.IOException;
+import java.util.Collections;
+import java.util.Map;
 
 /**
  *
@@ -114,7 +115,7 @@ public class QuizController {
                 } catch (IOException ex) {
                     System.out.println("Erreur");
                 }
-  
+  Collections.reverse(score);
       return score;
   }
   
@@ -133,5 +134,39 @@ public class QuizController {
                     System.out.println("Erreur");
                 }
   return true;}
+  
+  
+  
+  
+   public Map<String,Integer> getCorrectByType()
+   {
+       Map<String,Integer> myData;
+       QuizService qs=new QuizService();
+       myData=qs.getCorrectByTypeAction();
+       
+       return myData;
+   }
+   
+   
+   
+      public Map<String,Integer> getByType()
+   {
+       Map<String,Integer> myData;
+       QuizService qs=new QuizService();
+       myData=qs.getByTypeAction();
+       
+       return myData;
+   }
+      
+      
+      
+   public Map<Integer,Integer> getLineChart()
+   {
+       Map<Integer,Integer> myData;
+       QuizService qs=new QuizService();
+       myData=qs.getLineChartAction();
+       
+       return myData;
+   }
     
 }

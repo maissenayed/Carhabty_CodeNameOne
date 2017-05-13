@@ -21,6 +21,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import utils.LienWebService;
+import utils.Session;
 
 /**
  *
@@ -130,6 +131,7 @@ public class QuizService {
             req.setPost(true);
 
             req.addArgument("data",serialiseArrayReponse(lst));
+            req.addArgument("user", Session.getUser().getId()+"");
 
             NetworkManager.getInstance().addToQueueAndWait(req);
             //result = new JSONParser().parseJSON(new InputStreamReader(new ByteArrayInputStream(req.getResponseData()), "UTF-8"));
@@ -197,7 +199,7 @@ public class QuizService {
 
             ConnectionRequest req = new ConnectionRequest();
             
-            req.setUrl(urlGetCorrect);
+            req.setUrl(urlGetCorrect+"?user="+Session.getUser().getId());
             req.setPost(false);
 
             NetworkManager.getInstance().addToQueueAndWait(req);
@@ -229,7 +231,7 @@ public class QuizService {
 
             ConnectionRequest req = new ConnectionRequest();
             
-            req.setUrl(urlGetByType);
+            req.setUrl(urlGetByType+"?user="+Session.getUser().getId());
             req.setPost(false);
 
             NetworkManager.getInstance().addToQueueAndWait(req);
@@ -252,7 +254,7 @@ public class QuizService {
     }
      
         
-       public Map<Integer,Integer> getLineChart()
+       public Map<Integer,Integer> getLineChartAction()
     { Map<Integer,Integer> stat=new LinkedHashMap<Integer,Integer>();
     
      Map<String, Object> result = new LinkedHashMap<String, Object>();

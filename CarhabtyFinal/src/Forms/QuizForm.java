@@ -96,6 +96,7 @@ public class QuizForm extends SideMenuForm {
        
        
       Button scoreBtn=new Button("score");
+      scoreBtn.setUIID("BtnSucces");
       scoreBtn.addActionListener((evt) -> {
           
           new ScoreForm(this).show();
@@ -103,9 +104,10 @@ public class QuizForm extends SideMenuForm {
       });
     
       Button StatBtn=new Button("stat");
+      StatBtn.setUIID("BtnSucces");
       StatBtn.addActionListener((evt) -> {
-      StatForm m=new StatForm();
-      m.show();
+          StatistiqueForm st=new StatistiqueForm(this);
+          st.show();
       });
      
       Container pst=new Container(new GridLayout(3));

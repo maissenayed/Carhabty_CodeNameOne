@@ -25,6 +25,7 @@ import com.codename1.ui.layouts.GridLayout;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map.Entry;
+import utils.Session;
 
 /**
  * GUI builder created Container
@@ -69,7 +70,7 @@ public class QuestionTmpContainer extends com.codename1.ui.Container {
             finshControle();
             QuizController qc=new QuizController();
             int myscore=qc.saveAction(rdmList);
-            ScoreQuiz tp=new ScoreQuiz("test", myscore);
+            ScoreQuiz tp=new ScoreQuiz(Session.getUser().getNom(), myscore);
             qc.insertScore(tp);
 
         });

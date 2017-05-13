@@ -27,6 +27,7 @@ public class ScoreForm extends com.codename1.ui.Form {
         this(com.codename1.ui.util.Resources.getGlobalResources());
         
             Button back = new Button("back");
+            back.setUIID("BtnFail");
             
             
             this.setBackCommand(new Command("Back") {
